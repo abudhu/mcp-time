@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mcp-config
-  namespace: namespace-workflow-1761075426573
+  namespace: namespace-workflow-1761080544663
   labels:
     app.kubernetes.io/name: mcp
     kubernetes.azure.com/generator: devhub

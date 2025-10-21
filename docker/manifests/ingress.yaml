@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   annotations:
   name: "m-ingress"
-  namespace: "namespace-workflow-1761075426573"
+  namespace: "namespace-workflow-1761080544663"
   labels:
     app.kubernetes.io/name: m-ingress
     app.kubernetes.io/part-of: mcp-project

@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: mcp
     kubernetes.azure.com/generator: devhub
-  namespace: namespace-workflow-1761075426573
+  namespace: namespace-workflow-1761080544663
 spec:
   replicas: 1
   selector:
