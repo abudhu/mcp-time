@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: mcp
-          image: ambudhuacr.azurecr.io/gitmcp:latest
+          image: ambudhuacr.azurecr.io/gitmcp:sha256:88cb021395ee736aa4a57c554183659c3209b95ac1c48238e5f19ea76a4461b2
           imagePullPolicy: Always
           args:
             - "--pass-environment"
