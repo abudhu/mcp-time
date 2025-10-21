@@ -20,6 +20,14 @@ spec:
         - name: mcp
           image: ambudhuacr.azurecr.io/gitmcp:latest
           imagePullPolicy: Always
+          args:
+            - "--pass-environment"
+            - "--host=0.0.0.0"
+            - "--port=8096"
+            - "--allow-origin=*"
+            - "--"
+            - "uvx"
+            - "mcp-server-time"
           ports:
             - containerPort: 8096
           resources:
