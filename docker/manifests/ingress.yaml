@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+  name: "m-ingress"
+  namespace: "namespace-workflow-1761075426573"
+  labels:
+    app.kubernetes.io/name: m-ingress
+    app.kubernetes.io/part-of: mcp-project
+    kubernetes.azure.com/generator: draft
+spec:
+  ingressClassName: webapprouting.kubernetes.azure.com
+  rules:
+    - host: "time.amitbudhu.com"
+      http:
+        paths:
+          - backend:
+              service:
+                name: "mcp"
+                port:
+                  number: 8096
+            path: "/"
+            pathType: Prefix
