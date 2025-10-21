@@ -7,11 +7,3 @@ RUN python3 -m ensurepip && pip install --no-cache-dir uv
 
 # Keep the proxy as entrypoint (per README pattern that uses catatonit + mcp-proxy)
 # The base image already sets the entrypoint to mcp-proxy via catatonit.
-
-CMD ["--pass-environment",
-     "--host=0.0.0.0",
-     "--port=8096",
-     "--allow-origin=*",
-     "--",
-     "uvx",
-     "mcp-server-time"]
