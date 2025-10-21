@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "clusterName": {
+      "value": "aks-automatic-cluster"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "dnsPrefix": {
+      "value": "aks-auto-dns"
+    },
+    "tags": {
+      "value": {
+        "environment": "dev",
+        "workload": "aks-automatic"
+      }
+    },
+    "nodeVmSize": {
+      "value": "Standard_DS3_v2"
+    },
+    "minNodeCount": {
+      "value": 1
+    },
+    "maxNodeCount": {
+      "value": 3
+    },
+    "enableMonitoring": {
+      "value": true
+    },
+    "enableAzurePolicy": {
+      "value": true
+    }
+  }
+}

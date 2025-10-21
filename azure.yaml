@@ -1,0 +1,14 @@
+name: aks-automatic-mcp-2
+metadata:
+  template: aks-automatic-bicep
+  version: 1.0.0
+infra:
+  provider: bicep
+  path: infra
+  parameters:
+    clusterName: ${AZD_ENV_NAME}-aks
+    location: eastus
+    minNodeCount: 1
+    maxNodeCount: 3
+    enableMonitoring: true
+    enableAzurePolicy: true

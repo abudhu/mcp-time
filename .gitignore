@@ -1,0 +1,19 @@
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Bicep cache
+.bicep
+
+# Local environment overrides
+*.azureauth
+*.publishsettings
+.env*

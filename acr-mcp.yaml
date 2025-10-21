@@ -1,0 +1,78 @@
+
+---
+# ---------- Deployment ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-time-http
+  namespace: mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-time-http
+  template:
+    metadata:
+      labels:
+        app: mcp-time-http
+    spec:
+      containers:
+        - name: mcp-proxy
+          image: ambudhuacr.azurecr.io/mcp-proxy-uv:v1  # <-- your ACR image (no :latest)
+          imagePullPolicy: IfNotPresent
+          # mcp-proxy in server mode: expose SSE on :8096 and spawn the Time stdio server via uvx
+          args:
+            - "--pass-environment"
+            - "--host=0.0.0.0"
+            - "--port=8096"
+            - "--allow-origin=*"
+            - "--"
+            - "uvx"
+            - "mcp-server-time"
+          ports:
+            - name: http
+              containerPort: 8096
+          # Probes (satisfy Azure Policy "ContainerEnforceProbes")
+          readinessProbe:
+            tcpSocket:
+              port: 8096
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: 8096
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+
+---
+# ---------- Service (external) ----------
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-time-http
+  namespace: mcp
+  # If you want an *internal* Private IP instead, uncomment the annotation below
+  # annotations:
+  #   service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: mcp-time-http
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8096
